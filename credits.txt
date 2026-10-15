@@ -6,8 +6,8 @@ CSS clipping, keyboard support and Apple-inspired styling replace jQuery and ori
 
 Typeface: native system font stack, no Apple font files redistributed.
 Style reference: https://www.apple.com/safari/switch/
-Layout and church logo: user-supplied draft screenshots. The original full screenshot is
-encoded as draft-identity.webp and displayed through a CSS crop, without redrawing its logo.
+Layout reference: user-supplied draft screenshots.
+Church logo: user-supplied transparent PNG files.
 
 Photographs:
 User-provided Picture 220.jpg and selected files from nt cũ.

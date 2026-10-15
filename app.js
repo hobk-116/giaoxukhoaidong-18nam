@@ -8,9 +8,19 @@ const hero = document.querySelector('.hero');
 new ResizeObserver(() => {
   document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
 }).observe(header);
-new IntersectionObserver(([entry]) => {
-  header.classList.toggle('is-light', !entry.isIntersecting);
-}).observe(hero);
+let headerFrame;
+function updateHeader() {
+  const progress = Math.max(0, Math.min(1, -hero.getBoundingClientRect().bottom / 100));
+  header.style.setProperty('--header-progress', progress);
+  headerFrame = null;
+}
+function scheduleHeader() {
+  if (!headerFrame) headerFrame = requestAnimationFrame(updateHeader);
+}
+window.addEventListener('scroll', scheduleHeader, { passive: true });
+window.addEventListener('resize', scheduleHeader);
+new ResizeObserver(scheduleHeader).observe(hero);
+updateHeader();
 
 const anniversary = document.querySelector('.milestones-overlay');
 anniversary.classList.add('is-ready');
