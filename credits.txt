@@ -1,0 +1,16 @@
+Image comparison interaction:
+CodyHouse Image Comparison Slider, https://github.com/CodyHouse/image-comparison-slider
+Article: https://codyhouse.co/gem/css-jquery-image-comparison-slider
+Adaptation: original figure, cd-resize-img and cd-handle structure; native range interaction,
+CSS clipping, keyboard support and Apple-inspired styling replace jQuery and original theme.
+
+Typeface: native system font stack, no Apple font files redistributed.
+Style reference: https://www.apple.com/safari/switch/
+Layout and church logo: user-supplied draft screenshots. The original full screenshot is
+encoded as draft-identity.webp and displayed through a CSS crop, without redrawing its logo.
+
+Photographs:
+User-provided Picture 220.jpg and selected files from nt cũ.
+Web copies resized and encoded as WebP; no retouching, no generated photographs.
+Source provenance is embedded in each WebP XMP field and listed in .impeccable/assets.json
+in the development project. Sample pairings do not establish before/after chronology.

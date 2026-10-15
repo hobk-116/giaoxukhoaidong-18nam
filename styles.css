@@ -1,0 +1,221 @@
+@font-face { font-family: "Editorial New"; src: url("assets/fonts/EditorialNew-UltralightItalic.ttf") format("truetype"); font-style: italic; font-weight: 200; font-display: swap; }
+@font-face { font-family: "Anton"; src: url("assets/fonts/Anton-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "UTM Bebas"; src: url("assets/fonts/UTM-Bebas.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+:root {
+  --canvas: #fff;
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --soft: #f5f5f7;
+  --hairline: #d2d2d7;
+  --blue: #0071e3;
+  --link: #0066cc;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+  line-height: 1.47059;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height, 55.111px) + 16px);
+  scrollbar-color: #a1a1a6 var(--soft);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, p, figure, ul { margin: 0; }
+body { min-width: 0; -webkit-font-smoothing: antialiased; }
+::selection { color: #fff; background: var(--link); }
+a { color: inherit; text-decoration: none; text-underline-offset: 4px; }
+button, input { font: inherit; }
+img { display: block; max-width: 100%; }
+svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.wrap { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip-link { position: fixed; left: 24px; top: -100px; padding: 12px 20px; background: var(--ink); color: #fff; z-index: 100; }
+.skip-link:focus { top: 20px; }
+.site-header { position: sticky; top: 0; z-index: 20; color: #ececec; background-color: transparent; transition: color .4s var(--ease), background-color .4s var(--ease); }
+.site-header.is-light { color: #29282a; background-color: #fff; }
+main { margin-top: calc(-1 * var(--header-height, 55.111px)); }
+.identity-header { width: min(1440px, calc(100% - 96px)); min-height: 55.111px; margin-inline: auto; display: flex; justify-content: space-between; align-items: center; gap: 21.333px; }
+.site-identity { display: inline-flex; align-items: flex-end; gap: 13.333px; white-space: nowrap; font-size: clamp(13.44px, 1.26vw, 19.04px); font-weight: 400; letter-spacing: -.025em; }
+.site-identity > span:last-child { line-height: 1; transform: translateY(-4px); }
+.brand-mark { position: relative; flex: none; width: 56px; height: 45.333px; }
+.brand-mark::before, .brand-mark::after { content: ""; position: absolute; inset: 0; background-position: center; background-size: contain; background-repeat: no-repeat; transition: opacity .4s var(--ease); }
+.brand-mark::before { background-image: url("assets/images/logo-transparent-white.png"); }
+.brand-mark::after { background-image: url("assets/images/logo-transparent.png"); opacity: 0; }
+.site-header.is-light .brand-mark::before { opacity: 0; }
+.site-header.is-light .brand-mark::after { opacity: 1; }
+.diocese { font-size: clamp(9.333px, .813333vw, 12.667px); text-align: right; line-height: 1.4; transform: translateY(calc((45.333px - 1.4em) / 2 - 4px)); }
+.text-link:hover { color: var(--link); text-decoration: underline; }
+.hero { width: 100%; margin: 0; }
+.hero-photo { --caption-gap: 7%; position: relative; }
+.hero-photo::before { content: ""; position: absolute; z-index: 2; bottom: 0; left: 0; right: 0; height: calc(var(--caption-gap) / 2); background: linear-gradient(to bottom, rgb(255 255 255 / 0), #fff); pointer-events: none; }
+.hero-photo > img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
+.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / .7), transparent 46%); pointer-events: none; }
+.anniversary-track { position: absolute; z-index: 1; inset: 0 24px var(--caption-gap); display: flex; align-items: flex-end; pointer-events: none; scroll-margin-top: 96px; }
+.milestones-overlay { position: sticky; bottom: max(28px, env(safe-area-inset-bottom)); width: 100%; text-align: center; color: #fff; }
+.milestones-overlay.is-ready { animation: anniversary-appear 1s var(--ease) both; }
+@keyframes anniversary-appear { from { opacity: 0; } to { opacity: 1; } }
+.anniversary-title { display: flex; align-items: baseline; justify-content: center; gap: .28em; font-size: clamp(48px, 7.1vw, 96px); line-height: 1; font-weight: 400; letter-spacing: -.02em; }
+.anniversary-years { font-family: "Editorial New", Georgia, serif; font-style: italic; font-weight: 200; white-space: nowrap; }
+.anniversary-revival { font-family: "Anton", sans-serif; font-weight: 400; white-space: nowrap; }
+.anniversary-dates { margin-top: -.12em; font-family: "UTM Bebas", sans-serif; font-size: clamp(22px, 3.1vw, 42px); line-height: 1; letter-spacing: .015em; }
+.history-section { padding-bottom: 112px; }
+.history-section > h2 { margin-bottom: 64px; text-align: center; }
+.history-timeline { max-width: 720px; margin: 0 auto; padding: 0; list-style: none; }
+.timeline-entry { position: relative; display: grid; grid-template-columns: 180px 1fr; gap: 48px; padding-bottom: 64px; }
+.timeline-entry:last-child { padding-bottom: 0; }
+.timeline-entry::before { content: ""; position: absolute; top: 20px; bottom: -20px; left: 203px; width: 1px; background: var(--hairline); }
+.timeline-entry:last-child::before { display: none; }
+.timeline-entry::after { content: ""; position: absolute; left: 200px; top: 20px; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.timeline-date { display: flex; flex-direction: column; gap: 10px; text-align: right; }
+.timeline-anniversary { color: var(--muted); font-size: 16px; line-height: 1.4; white-space: nowrap; }
+.timeline-year { font-size: 48px; line-height: 1; font-weight: 500; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.timeline-copy { padding-top: 4px; }
+.timeline-copy h3 { font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.02em; }
+.timeline-copy p { margin-top: 12px; color: var(--muted); font-size: 17px; line-height: 1.5; }
+.introduction { padding-block: 112px 140px; }
+h2 { font-size: clamp(36px, 3.55vw, 48px); line-height: 1.0835; font-weight: 600; letter-spacing: -.025em; text-wrap: balance; }
+.introduction h2 { font-size: clamp(30px, 3.25vw, 46px); text-align: center; line-height: 1.16; }
+.intro-copy { max-width: 720px; margin: 64px auto 0; color: var(--ink); font-size: 21px; line-height: 1.5; letter-spacing: -.015em; }
+.timeline-copy p.long-copy { color: var(--ink); }
+.intro-copy p, .timeline-copy p { text-align: justify; text-align-last: left; }
+.intro-copy p + p { margin-top: 40px; }
+.parish-year { margin-top: 80px; }
+.parish-year > h2 { text-align: center; }
+.parish-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 48px 0 0; padding: 0; list-style: none; text-align: center; }
+.parish-stats li { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.parish-stats strong { font-size: clamp(32px, 3.2vw, 44px); line-height: 1.1; font-weight: 500; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.parish-stats h3 { color: var(--ink); font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -.02em; }
+.parish-stats p { max-width: 24ch; color: var(--muted); font-size: 14px; line-height: 1.5; text-wrap: balance; }
+@media (max-width: 760px) {
+  .parish-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; margin-top: 48px; }
+  .parish-year { margin-top: 64px; }
+}
+.personnel-section { padding-bottom: 112px; }
+.personnel-section > h2 { margin-bottom: 48px; text-align: center; }
+.personnel-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 0; list-style: none; }
+.person-card { position: relative; overflow: hidden; border-radius: 16px; background: var(--soft); }
+.person-card > img { width: 100%; aspect-ratio: 4 / 5; height: auto; object-fit: cover; }
+.person-caption { position: absolute; left: 12px; right: 12px; bottom: 12px; min-height: 72px; padding: 6px 10.667px; border-radius: 12px; background: var(--canvas); display: flex; flex-direction: column; justify-content: center; gap: 2px; text-align: center; }
+.person-title { color: var(--muted); font-size: 14px; line-height: 1.2; }
+.person-caption h3 { font-size: 18px; font-weight: 600; line-height: 1.25; letter-spacing: -.02em; }
+.person-caption p { color: var(--muted); font-size: 14px; line-height: 1.4; }
+@media (min-width: 761px) and (max-width: 1100px) {
+  .personnel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .personnel-section { padding-bottom: 72px; }
+  .personnel-section > h2 { margin-bottom: 32px; }
+  .personnel-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; max-width: 440px; margin-inline: auto; }
+  .person-caption { min-height: 66.667px; }
+}
+.gallery-section { background: var(--soft); padding-block: 112px 96px; }
+.section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+.gallery-heading { margin-bottom: 48px; }
+.gallery-instructions { max-width: 350px; }
+.drag-instruction { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; }
+.gallery-instructions p { font-size: 13px; line-height: 1.5; color: var(--muted); margin-top: 12px; }
+.gallery-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 64px; }
+.comparison-card { width: 100%; min-width: 0; }
+.portrait-comparison { max-width: 720px; justify-self: center; }
+.comparison-caption { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-top: 22px; }
+.comparison-caption h3 { font-size: 24px; font-weight: 600; letter-spacing: -.02em; line-height: 1.167; }
+.comparison-caption p { color: var(--muted); font-size: 15px; line-height: 1.47; margin-top: 8px; }
+.sample-tag { color: var(--muted); font-size: 12px; line-height: 1.5; white-space: nowrap; padding-top: 2px; }
+/* CodyHouse comparison structure; full-size layers remain aligned while clipping. */
+.cd-image-container { --progress: .5; --handle-size: 52px; --ring-space: 7px; --edge: calc(var(--handle-size) / 2 + var(--ring-space)); --position: calc(var(--edge) + (100% - var(--edge) * 2) * var(--progress)); position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; background: #dededb; isolation: isolate; }
+.cd-image-container.portrait { aspect-ratio: 3 / 4; }
+.cd-image-container img { width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.cd-base-img { position: relative; width: 100%; height: 100%; clip-path: inset(0 0 0 var(--position)); }
+.cd-resize-img { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--position)) 0 0); }
+.comparison-divider { position: absolute; top: 0; bottom: 0; left: var(--position); width: 2px; background: #fff; transform: translateX(-1px); pointer-events: none; }
+.cd-handle { position: absolute; left: var(--position); top: 50%; width: var(--handle-size); height: var(--handle-size); transform: translate(-50%, -50%); display: grid; place-items: center; background: #fff; color: var(--ink); border-radius: 50%; pointer-events: none; transition: background .2s var(--ease); }
+.cd-handle svg { width: 28px; height: 24px; stroke-width: 1.8; }
+.cd-image-container:hover .cd-handle { background: var(--soft); }
+.cd-image-label { position: absolute; top: 20px; padding: 7px 13px; border-radius: 980px; background: rgb(0 0 0 / .7); color: #fff; font-size: 12px; font-weight: 500; pointer-events: none; }
+.label-a { left: 20px; }
+.label-b { right: 20px; }
+.comparison-range { position: absolute; left: var(--ring-space); top: 0; height: 100%; width: calc(100% - var(--ring-space) * 2); padding: 0; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; appearance: none; }
+.comparison-range::-webkit-slider-thumb { appearance: none; width: var(--handle-size); height: var(--handle-size); }
+.comparison-range::-moz-range-thumb { width: var(--handle-size); height: var(--handle-size); border: 0; }
+.cd-image-container:focus-within .cd-handle { outline: 3px solid var(--blue); outline-offset: 4px; }
+.comparison-range:disabled { cursor: default; }
+.comparison-error { position: absolute; bottom: 16px; left: 16px; right: 16px; background: #fff; color: var(--ink); border-radius: 12px; padding: 12px 16px; font-size: 14px; }
+.gallery-footnote { max-width: 72ch; margin: 48px auto 0; color: var(--muted); font-size: 12px; text-align: center; line-height: 1.5; }
+.no-script { margin-bottom: 24px; }
+.site-footer { background: var(--soft); padding-block: 16px 21.333px; }
+.footer-main { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--hairline); }
+.footer-brand { font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+.text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--link); font-size: 13px; min-height: 44px; }
+.text-link svg { width: 15px; height: 15px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-top: 13.333px; font-size: 12px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 1100px) {
+  .identity-header { gap: 16px; }
+  .site-identity { gap: 8px; font-size: 14px; }
+  .diocese { max-width: 400px; font-size: 9.333px; }
+  .brand-mark { width: 45.333px; }
+  .comparison-caption { flex-direction: column; gap: 10px; }
+}
+@media (max-width: 760px) {
+  .wrap { width: calc(100% - 40px); }
+  .identity-header { width: calc(100% - 40px); padding-block: 4px; min-height: 52.444px; flex-direction: column; justify-content: center; gap: 3px; }
+  .site-identity { font-size: 14px; gap: 8px; }
+  .brand-mark { width: 32px; height: 29.333px; }
+  .diocese { max-width: 100%; text-align: center; font-size: 8px; line-height: 1.5; text-wrap: balance; transform: none; }
+  .hero-photo > img { aspect-ratio: 3 / 4; height: auto; object-fit: cover; object-position: center; }
+  .hero-photo::after { background: linear-gradient(0deg, rgb(0 0 0 / .82), transparent 66%); }
+  .hero-photo { --caption-gap: 28px; }
+  .anniversary-track { left: 20px; right: 20px; }
+  .anniversary-title { font-size: clamp(45px, 10.65vw, 81px); }
+  .anniversary-dates { font-size: clamp(14.667px, 3.8vw, 21.333px); }
+  .history-section { padding-bottom: 72px; }
+  .history-section > h2 { margin-bottom: 40px; }
+  .timeline-entry { grid-template-columns: 84px 1fr; gap: 32px; padding-bottom: 40px; }
+  .timeline-entry::before { left: 99px; top: 14px; bottom: -14px; }
+  .timeline-entry::after { left: 96px; top: 14px; }
+  .timeline-year { font-size: 32px; }
+  .timeline-copy { padding-top: 0; }
+  .timeline-copy h3 { font-size: 20px; }
+  .timeline-copy p { margin-top: 8px; font-size: 16px; }
+  .introduction { padding-block: 72px 88px; }
+  .introduction h2 { font-size: 30px; line-height: 1.16; }
+  .intro-copy { margin-top: 36px; font-size: 17px; line-height: 1.529; }
+  .intro-copy p + p { margin-top: 32px; }
+  .gallery-section { padding-block: 64px; }
+  h2 { font-size: 36px; line-height: 1.111; }
+  .gallery-heading { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
+  .gallery-instructions p br { display: none; }
+  .drag-instruction { font-size: 14px; }
+  .gallery-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cd-image-container { border-radius: 20px; }
+  .cd-image-label { top: 14px; padding: 6px 10px; font-size: 11px; }
+  .label-a { left: 14px; }
+  .label-b { right: 14px; }
+  .comparison-caption { flex-direction: row; padding-top: 18px; gap: 12px; }
+  .comparison-caption h3 { font-size: 21px; }
+  .comparison-caption p { font-size: 14px; }
+  .sample-tag { font-size: 10px; }
+  .gallery-footnote { text-align: left; margin-top: 32px; }
+  .footer-main { gap: 8px; }
+  .footer-brand { font-size: 14px; }
+  .text-link { font-size: 12px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10.667px; }
+}
+@media (min-width: 761px) {
+  .site-identity { align-items: center; }
+  .site-identity > span:last-child, .diocese { transform: none; }
+}
+@media (max-width: 374px) {
+  .anniversary-title { font-size: 10.65vw; }
+  .site-identity { font-size: 12.32px; }
+  .comparison-caption { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .milestones-overlay.is-ready { animation: none; }
+  :root { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0s !important; }
+}
+
+.site-footer .text-link { gap: 5.333px; min-height: 29.333px; }
+.site-footer .text-link svg { width: 10px; height: 10px; }
