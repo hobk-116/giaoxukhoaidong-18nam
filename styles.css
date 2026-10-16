@@ -36,7 +36,8 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 .skip-link:focus { top: 20px; }
 .site-header { --header-progress: 0; --header-ink-progress: 0; position: sticky; top: 0; z-index: 20; color: rgb(calc(236 - 195 * var(--header-ink-progress)) calc(236 - 196 * var(--header-ink-progress)) calc(236 - 194 * var(--header-ink-progress))); isolation: isolate; }
 .site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--hairline); opacity: var(--header-progress); pointer-events: none; }
-.site-header::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgb(255 255 255 / .70); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); opacity: var(--header-progress); pointer-events: none; }
+.site-header::before { content: ""; position: absolute; inset: 0; z-index: 0; background: rgb(255 255 255 / .70); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); opacity: var(--header-progress); pointer-events: none; }
+.identity-header { position: relative; z-index: 1; }
 main { margin-top: calc(-1 * var(--header-height, 55.111px)); }
 .identity-header { --identity-size: 18px; width: min(1440px, calc(100% - 40px)); min-height: 55.111px; margin-inline: auto; display: flex; justify-content: space-between; align-items: center; gap: calc(var(--identity-size) * 1.176); }
 .site-identity { display: inline-flex; align-items: center; gap: .3674em; white-space: nowrap; font-size: var(--identity-size); font-weight: 400; letter-spacing: -.025em; }
