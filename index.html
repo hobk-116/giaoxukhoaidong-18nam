@@ -19,8 +19,8 @@
   <meta name="twitter:image" content="https://giaoxukhoaidong-18nam.vercel.app/assets/images/hero.webp">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css?v=5dd13841eddb">
-  <script src="app.js?v=57418ba289fc" defer></script>
+  <link rel="stylesheet" href="styles.css?v=story-motion-1">
+  <script src="app.js?v=story-motion-1" defer></script>
 </head>
 <body id="dau-trang">
   <a class="skip-link" href="#noi-dung">Đến nội dung chính</a>
@@ -28,7 +28,17 @@
     <div class="identity-header">
       <a class="site-identity" href="#dau-trang" aria-label="Giáo xứ Khoái Đồng, về đầu trang"><span class="brand-mark" aria-hidden="true"></span><span><br>Giaoxukhoaidong.com</span></a>
       <p class="diocese">Giáo phận Bùi Chu<br>Giáo xứ Nữ Vương Các Thánh Tử Đạo</p>
+      <details class="section-menu">
+        <summary>Mục lục</summary>
+        <nav aria-label="Các phần trong trang">
+          <a href="#gioi-thieu">Giới thiệu</a>
+          <a href="#luoc-su">Lược sử</a>
+          <a href="#tu-si">Tu sĩ</a>
+          <a href="#thu-vien">Hình ảnh</a>
+        </nav>
+      </details>
     </div>
+    <span class="reading-progress" aria-hidden="true"></span>
   </header>
   <main id="noi-dung">
     <section class="hero" aria-labelledby="hero-title">
@@ -64,7 +74,7 @@
       </section>
     </section>
 
-    <section class="history-section wrap" aria-labelledby="history-title">
+    <section class="history-section wrap" id="luoc-su" aria-labelledby="history-title">
       <h2 id="history-title">Lược sử</h2>
       <ol class="history-timeline">
         <li class="timeline-entry"><div class="timeline-date"><span class="timeline-year">1700</span><span class="timeline-anniversary">326 năm</span></div><div class="timeline-copy"><h3>Thành lập Giáo họ</h3><p>Các tín hữu của giáo xứ Khoái Đồng đón nhận Tin Mừng khi các thừa sai Dòng Tên đến giảng đạo. Được sự giúp đỡ của các vị thừa sai, giáo hữu cùng nhau góp công góp của làm nhà thờ. Giáo họ Khoái Đồng được thành lập khoảng năm 1700 và được các cha Dòng Tên phục vụ. Từ năm 1759, giáo họ Khoái Đồng được trao cho các cha Dòng Đa Minh coi sóc.</p></div></li>
@@ -75,9 +85,10 @@
       </ol>
     </section>
 
-    <section class="personnel-section wrap" aria-labelledby="personnel-title">
+    <section class="personnel-section wrap" id="tu-si" aria-labelledby="personnel-title">
       <h2 id="personnel-title">Các tu sĩ đang phụng vụ</h2>
-      <ul class="personnel-grid">
+      <p class="personnel-hint" id="personnel-help">Vuốt ngang hoặc dùng phím mũi tên để xem các tu sĩ</p>
+      <ul class="personnel-grid" tabindex="0" aria-label="Chân dung các tu sĩ" aria-describedby="personnel-help">
         <li class="person-card"><img src="assets/images/DinhKhacVinh.webp?v=48ee294f46bf" width="1200" height="1500" loading="lazy" decoding="async" alt="Linh mục Giuse Đinh Khắc Vịnh, O.P."><div class="person-caption"><span class="person-title">Linh mục</span><h3>Giuse Đinh Khắc Vịnh, O.P.</h3><p>Chính xứ, từ 2024</p></div></li>
         <li class="person-card"><img src="assets/images/DaoVanHung.webp?v=63c47a4eb605" width="894" height="1117" loading="lazy" decoding="async" alt="Linh mục Phêrô Đào Văn Hùng, O.P."><div class="person-caption"><span class="person-title">Linh mục</span><h3>Phêrô Đào Văn Hùng, O.P.</h3><p>Phó xứ</p></div></li>
         <li class="person-card"><img src="assets/images/VuVanTin.webp?v=ab09edba95f6" width="504" height="630" loading="lazy" decoding="async" alt="Linh mục Gioan Baotixita Vũ Văn Tín, O.P."><div class="person-caption"><span class="person-title">Linh mục</span><h3>Gioan Baotixita Vũ Văn Tín, O.P.</h3><p>Đặc Trách Huynh đoàn Đa Minh Giáo phận</p></div></li>
@@ -93,7 +104,7 @@
           <h2 id="gallery-title">Hình ảnh Giáo xứ<br>qua thời gian</h2>
           <div class="gallery-instructions">
             <span class="drag-instruction"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M7 8l-4 4 4 4m10-8 4 4-4 4"/></svg>Kéo thanh giữa để so sánh</span>
-            <p>Các cặp ảnh tư liệu dưới đây dùng làm mẫu.</p>
+            <p>Các cặp ảnh tư liệu dưới đây dùng làm mẫu; niên đại từng ảnh chưa được xác minh.</p>
           </div>
         </div>
 
@@ -102,52 +113,71 @@
         <div class="gallery-grid">
           <article class="comparison-card" aria-labelledby="interior-title">
             <figure class="cd-image-container">
-              <div class="cd-base-img"><img src="assets/images/hero.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Lòng thánh đường, ảnh tư liệu B từ Picture 220.jpg"><span class="cd-image-label label-b">2026</span></div>
-              <div class="cd-resize-img"><img src="assets/images/interior-a.webp" width="1440" height="1080" loading="lazy" decoding="async" alt="Lòng thánh đường, ảnh tư liệu A từ Picture 219.jpg"><span class="cd-image-label label-a">2008</span></div>
+              <div class="cd-base-img"><img src="assets/images/hero.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Lòng thánh đường, ảnh tư liệu B từ Picture 220.jpg"><span class="cd-image-label label-b">Ảnh B</span></div>
+              <div class="cd-resize-img"><img src="assets/images/interior-a.webp" width="1440" height="1080" loading="lazy" decoding="async" alt="Lòng thánh đường, ảnh tư liệu A từ Picture 219.jpg"><span class="cd-image-label label-a">Ảnh A</span></div>
               <span class="comparison-divider" aria-hidden="true"></span>
               <span class="cd-handle" aria-hidden="true"><svg viewBox="0 0 28 24"><path d="m10 7-5 5 5 5m8-10 5 5-5 5"/></svg></span>
               <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="So sánh hai ảnh lòng thánh đường" aria-describedby="comparison-help">
             </figure>
             <div class="comparison-caption"><div><h3 id="interior-title">Lòng thánh đường</h3><p>Những hàng cột, mái vòm và khoảng sáng thân quen</p></div><span class="sample-tag">Cặp ảnh mẫu</span></div>
+          <button class="view-large" type="button" aria-haspopup="dialog" aria-describedby="interior-title" hidden>Xem lớn</button>
           </article>
 
           <article class="comparison-card portrait-comparison" aria-labelledby="facade-title">
             <figure class="cd-image-container portrait">
-              <div class="cd-base-img"><img src="assets/images/facade-b.webp" width="900" height="1200" loading="lazy" decoding="async" alt="Mặt tiền và tháp chuông Khoái Đồng, ảnh tư liệu B"><span class="cd-image-label label-b">2026</span></div>
-              <div class="cd-resize-img"><img src="assets/images/facade-a.webp" width="900" height="1200" loading="lazy" decoding="async" alt="Mặt tiền và tháp chuông Khoái Đồng, ảnh tư liệu A"><span class="cd-image-label label-a">2008</span></div>
+              <div class="cd-base-img"><img src="assets/images/facade-b.webp" width="900" height="1200" loading="lazy" decoding="async" alt="Mặt tiền và tháp chuông Khoái Đồng, ảnh tư liệu B"><span class="cd-image-label label-b">Ảnh B</span></div>
+              <div class="cd-resize-img"><img src="assets/images/facade-a.webp" width="900" height="1200" loading="lazy" decoding="async" alt="Mặt tiền và tháp chuông Khoái Đồng, ảnh tư liệu A"><span class="cd-image-label label-a">Ảnh A</span></div>
               <span class="comparison-divider" aria-hidden="true"></span>
               <span class="cd-handle" aria-hidden="true"><svg viewBox="0 0 28 24"><path d="m10 7-5 5 5 5m8-10 5 5-5 5"/></svg></span>
               <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="So sánh hai ảnh mặt tiền và tháp chuông" aria-describedby="comparison-help">
             </figure>
             <div class="comparison-caption"><div><h3 id="facade-title">Dáng tháp thân quen</h3><p>Mặt tiền thánh đường trong hai khung hình</p></div><span class="sample-tag">Cặp ảnh mẫu</span></div>
+          <button class="view-large" type="button" aria-haspopup="dialog" aria-describedby="facade-title" hidden>Xem lớn</button>
           </article>
 
           <article class="comparison-card" aria-labelledby="dome-title">
             <figure class="cd-image-container">
-              <div class="cd-base-img"><img src="assets/images/dome-b.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Mái vòm Khoái Đồng và những người làm việc trên mái, ảnh tư liệu B"><span class="cd-image-label label-b">2026</span></div>
-              <div class="cd-resize-img"><img src="assets/images/dome-a.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Mái vòm Khoái Đồng nhìn từ mái ngói, ảnh tư liệu A"><span class="cd-image-label label-a">2008</span></div>
+              <div class="cd-base-img"><img src="assets/images/dome-b.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Mái vòm Khoái Đồng và những người làm việc trên mái, ảnh tư liệu B"><span class="cd-image-label label-b">Ảnh B</span></div>
+              <div class="cd-resize-img"><img src="assets/images/dome-a.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Mái vòm Khoái Đồng nhìn từ mái ngói, ảnh tư liệu A"><span class="cd-image-label label-a">Ảnh A</span></div>
               <span class="comparison-divider" aria-hidden="true"></span>
               <span class="cd-handle" aria-hidden="true"><svg viewBox="0 0 28 24"><path d="m10 7-5 5 5 5m8-10 5 5-5 5"/></svg></span>
               <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="So sánh hai ảnh mái vòm" aria-describedby="comparison-help">
             </figure>
             <div class="comparison-caption"><div><h3 id="dome-title">Dưới một mái vòm</h3><p>Dấu vết thời gian trên từng viên ngói</p></div><span class="sample-tag">Cặp ảnh mẫu</span></div>
+          <button class="view-large" type="button" aria-haspopup="dialog" aria-describedby="dome-title" hidden>Xem lớn</button>
           </article>
 
           <article class="comparison-card" aria-labelledby="wall-title">
             <figure class="cd-image-container">
-              <div class="cd-base-img"><img src="assets/images/wall-b.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Tường bên với hàng cửa vòm của thánh đường, ảnh tư liệu B"><span class="cd-image-label label-b">2026</span></div>
-              <div class="cd-resize-img"><img src="assets/images/wall-a.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Tường bên và mái vòm thánh đường nhìn từ góc khác, ảnh tư liệu A"><span class="cd-image-label label-a">2008</span></div>
+              <div class="cd-base-img"><img src="assets/images/wall-b.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Tường bên với hàng cửa vòm của thánh đường, ảnh tư liệu B"><span class="cd-image-label label-b">Ảnh B</span></div>
+              <div class="cd-resize-img"><img src="assets/images/wall-a.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Tường bên và mái vòm thánh đường nhìn từ góc khác, ảnh tư liệu A"><span class="cd-image-label label-a">Ảnh A</span></div>
               <span class="comparison-divider" aria-hidden="true"></span>
               <span class="cd-handle" aria-hidden="true"><svg viewBox="0 0 28 24"><path d="m10 7-5 5 5 5m8-10 5 5-5 5"/></svg></span>
               <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="So sánh hai ảnh tường bên thánh đường" aria-describedby="comparison-help">
             </figure>
             <div class="comparison-caption"><div><h3 id="wall-title">Một góc nhìn khác</h3><p>Những ô cửa lưu giữ ký ức về ngôi nhà chung.</p></div><span class="sample-tag">Cặp ảnh mẫu</span></div>
+          <button class="view-large" type="button" aria-haspopup="dialog" aria-describedby="wall-title" hidden>Xem lớn</button>
           </article>
         </div>
         <p class="gallery-footnote" id="comparison-help">Chạm hoặc kéo ngang trên ảnh</p>
       </div>
     </section>
   </main>
+
+  <dialog class="photo-dialog" aria-labelledby="photo-dialog-title">
+    <div class="photo-toolbar">
+      <h2 id="photo-dialog-title">Ảnh tư liệu</h2>
+      <button class="photo-close" type="button" autofocus>Đóng</button>
+    </div>
+    <div class="photo-switch" role="group" aria-label="Chọn ảnh tư liệu">
+      <button type="button" data-photo="a" aria-pressed="true">Ảnh A</button>
+      <button type="button" data-photo="b" aria-pressed="false">Ảnh B</button>
+      <button class="photo-zoom" type="button" aria-pressed="false">Phóng to</button>
+    </div>
+    <div class="photo-stage" tabindex="0" aria-label="Ảnh lớn; cuộn để xem chi tiết khi phóng to"><img class="photo-large" alt=""></div>
+    <p class="photo-status" role="status"></p>
+    <p class="photo-note">Ảnh mẫu, chưa xác minh niên đại</p>
+  </dialog>
 
   <footer class="site-footer">
     <div class="wrap">
