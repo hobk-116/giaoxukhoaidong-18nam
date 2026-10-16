@@ -10,8 +10,11 @@ new ResizeObserver(() => {
 }).observe(header);
 let headerFrame;
 function updateHeader() {
-  const progress = Math.max(0, Math.min(1, -hero.getBoundingClientRect().bottom / 100));
+  const bottom = hero.getBoundingClientRect().bottom;
+  const progress = Math.max(0, Math.min(25, -bottom / 125));
+  const inkProgress = Math.max(0, Math.min(1, (header.offsetHeight + 100 - bottom) / 100));
   header.style.setProperty('--header-progress', progress);
+  header.style.setProperty('--header-ink-progress', inkProgress);
   headerFrame = null;
 }
 function scheduleHeader() {
