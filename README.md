@@ -20,7 +20,7 @@ Các thay đổi:
 - Chân dung vuốt ngang trên mobile; hỗ trợ phím trái/phải, Home/End; desktop có hover nhẹ.
 - Mục lục thu gọn và vạch tiến độ đọc; chữ nội dung mobile căn trái.
 - Thanh so sánh đầu tiên hướng dẫn một lần, dừng khi có thao tác.
-- Xem ảnh lớn, đổi A/B, phóng to và cuộn chi tiết; Escape đóng và trả focus.
+- Xem ảnh lớn, đổi A/B bằng cụm nút dưới ảnh; Escape đóng và trả focus.
 - Nhãn ảnh mẫu A/B thay cho niên đại chưa xác minh.
 - Tôn trọng prefers-reduced-motion, kể cả khi thay đổi trong lúc xem; nội dung vẫn đọc được khi tắt JavaScript.
 

@@ -7,6 +7,7 @@ const header = document.querySelector('.site-header');
 const hero = document.querySelector('.hero');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const timeline = document.querySelector('.history-timeline');
+const nativeTimeline = CSS.supports('(animation-timeline: view()) and (timeline-scope: --history-line)');
 const milestones = [...timeline.querySelectorAll('.timeline-entry')];
 const menu = document.querySelector('.section-menu');
 const sectionLinks = [...menu.querySelectorAll('a')];
@@ -25,7 +26,10 @@ function updateHeader() {
   header.style.setProperty('--reading-progress', Math.max(0, Math.min(1, scrollY / Math.max(1, scrollLength))));
   const readingLine = innerHeight * .45;
   const timelineBox = timeline.getBoundingClientRect();
-  timeline.style.setProperty('--timeline-fill', `${Math.max(0, Math.min(1, (readingLine - timelineBox.top) / timelineBox.height)) * 100}%`);
+  if (!nativeTimeline) {
+    const lineTop = parseFloat(getComputedStyle(timeline, '::after').top);
+    timeline.style.setProperty('--timeline-fill', Math.max(0, Math.min(1, (readingLine - timelineBox.top - lineTop) / (timelineBox.height - lineTop))));
+  }
   const currentMilestone = milestones.findLast(entry => entry.getBoundingClientRect().top <= readingLine);
   milestones.forEach(entry => entry.classList.toggle('is-current', entry === currentMilestone && timelineBox.bottom > readingLine));
   const currentSection = sections.findLast(section => section.getBoundingClientRect().top <= header.offsetHeight + 32);
@@ -67,10 +71,17 @@ document.querySelectorAll('.cd-image-container').forEach((figure) => {
   function update() {
     const position = Number(range.value);
     figure.style.setProperty('--progress', position / 100);
-    range.setAttribute('aria-valuetext', `Vị trí thanh chia ${position}%`);
+    range.setAttribute('aria-valuetext', `Vị trí thanh chia ${Math.round(position)}%`);
   }
 
   range.addEventListener('input', update);
+  range.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return;
+    event.preventDefault();
+    const direction = ['ArrowRight', 'ArrowUp'].includes(event.key) ? 1 : -1;
+    range.value = String(Math.max(0, Math.min(100, Number(range.value) + direction)));
+    update();
+  });
   update();
 
   figure.querySelectorAll('img').forEach((img) => {
@@ -152,18 +163,42 @@ const hint = new IntersectionObserver(entries => {
   hintUsed = true;
   hint.disconnect();
   if (reducedMotion.matches || firstRange.disabled) return;
+  firstComparison.classList.add('is-hinting');
+  // Integrate a Gaussian velocity curve over -3σ…3σ into position.
+  const cumulative = [0];
+  for (let i = 1; i <= 120; i++) {
+    const x = -3 + (i - .5) / 20;
+    cumulative.push(cumulative[i - 1] + Math.exp(-x * x / 2));
+  }
+  function gaussianPosition(t) {
+    const index = Math.max(0, Math.min(1, t)) * 120;
+    const lower = Math.floor(index);
+    return (cumulative[lower] + (cumulative[Math.min(lower + 1, 120)] - cumulative[lower]) * (index - lower)) / cumulative[120];
+  }
   const start = performance.now();
   function tick(now) {
-    const progress = reducedMotion.matches ? 1 : Math.min(1, (now - start) / 1200);
-    if (firstRange.disabled) return;
-    firstRange.value = String(Math.round(50 + 10 * Math.sin(Math.PI * progress)));
+    if (firstRange.disabled) { stopHint(); return; }
+    const elapsed = reducedMotion.matches ? 2400 : now - start;
+    if (elapsed >= 1800) firstComparison.classList.remove('is-hinting');
+    let position;
+    if (elapsed < 600) {
+      const progress = 2 * gaussianPosition(.5 + elapsed / 1200) - 1;
+      position = 50 - 49 * progress;
+    } else if (elapsed < 1800) {
+      position = 1 + 98 * gaussianPosition((elapsed - 600) / 1200);
+    } else {
+      position = 99 - 49 * gaussianPosition((elapsed - 1800) / 600);
+    }
+    firstRange.value = String(position);
     firstRange.dispatchEvent(new Event('input'));
-    if (progress < 1) hintFrame = requestAnimationFrame(tick);
+    if (elapsed < 2400) hintFrame = requestAnimationFrame(tick);
   }
   hintFrame = requestAnimationFrame(tick);
 }, { threshold: .3 });
 hint.observe(firstComparison);
 function stopHint() {
+  firstComparison.classList.add('hint-interrupted');
+  firstComparison.classList.remove('is-hinting');
   hintUsed = true;
   hint.disconnect();
   cancelAnimationFrame(hintFrame);
@@ -173,16 +208,10 @@ function stopHint() {
 const photoDialog = document.querySelector('.photo-dialog');
 const photoImage = photoDialog.querySelector('.photo-large');
 const photoStatus = photoDialog.querySelector('.photo-status');
-const photoStage = photoDialog.querySelector('.photo-stage');
-const photoZoom = photoDialog.querySelector('.photo-zoom');
 const photoButtons = [...photoDialog.querySelectorAll('[data-photo]')];
 let photoCard;
 let photoOpener;
 function showPhoto(side) {
-  photoStage.classList.remove('is-zoomed');
-  photoZoom.setAttribute('aria-pressed', 'false');
-  photoZoom.textContent = 'Phóng to';
-  photoStage.scrollTo(0, 0);
   const original = photoCard.querySelector(side === 'a' ? '.cd-resize-img img' : '.cd-base-img img');
   photoStatus.textContent = 'Đang tải ảnh…';
   photoImage.style.visibility = 'hidden';
@@ -196,13 +225,8 @@ photoImage.addEventListener('load', () => {
 });
 photoImage.addEventListener('error', () => { photoStatus.textContent = 'Chưa tải được ảnh. Hãy thử chọn ảnh còn lại hoặc mở lại.'; });
 photoButtons.forEach(button => button.addEventListener('click', () => showPhoto(button.dataset.photo)));
-photoZoom.addEventListener('click', () => {
-  const zoomed = photoStage.classList.toggle('is-zoomed');
-  photoZoom.setAttribute('aria-pressed', String(zoomed));
-  photoZoom.textContent = zoomed ? 'Thu nhỏ' : 'Phóng to';
-});
 document.querySelectorAll('.view-large').forEach(button => {
-  button.hidden = false;
+  button.hidden = true; // Temporarily unused; keep the viewer for later.
   button.addEventListener('click', () => {
     stopHint();
     photoOpener = button;
