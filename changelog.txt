@@ -1,0 +1,14 @@
+## Changelog
+
+### 2026-10-17
+
+- Tích hợp nhánh `codex/story-motion` vào `main` tại commit `06a49cf`.
+- Thêm chuyển động mở đầu, số liệu đếm lên, mục lục thu gọn và tiến độ đọc.
+- Timeline theo vị trí cuộn, hỗ trợ cuộn nhanh xuôi/ngược và phương án dự phòng cho trình duyệt chưa hỗ trợ animation-timeline.
+- Chân dung hỗ trợ vuốt ngang trên mobile và điều khiển bằng bàn phím.
+- Thanh so sánh ảnh có hướng dẫn chuyển động một lần, dừng khi người dùng thao tác; nhãn A/B không khẳng định niên đại chưa xác minh.
+- Tạm ẩn nút “Xem lớn”; giữ mã hộp xem ảnh để sử dụng sau.
+- Giữ favicon ICO và các chỉnh sửa header từ bản nền.
+- Hỗ trợ giảm chuyển động; nội dung vẫn đọc được khi tắt JavaScript.
+- Kiểm tra timeline đạt ở 390/768/1440px. Kiểm tra motion với phần mở ảnh đang ẩn được bỏ qua đạt ở 320/390/1440px, gồm cảm ứng mô phỏng, bàn phím, giảm chuyển động và không JavaScript. Bài kiểm tra gốc còn yêu cầu bấm nút đang ẩn; chưa kiểm tra trên iPhone Safari thực tế.
+

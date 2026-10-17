@@ -14,7 +14,7 @@ Website kỷ niệm 18 năm hồi sinh Giáo xứ Khoái Đồng.
 - Hỗ trợ giảm chuyển động; nội dung vẫn đọc được khi tắt JavaScript.
 - Kiểm tra timeline đạt ở 390/768/1440px. Kiểm tra motion với phần mở ảnh đang ẩn được bỏ qua đạt ở 320/390/1440px, gồm cảm ứng mô phỏng, bàn phím, giảm chuyển động và không JavaScript. Bài kiểm tra gốc còn yêu cầu bấm nút đang ẩn; chưa kiểm tra trên iPhone Safari thực tế.
 
-Changelog trên bản triển khai: [README.md](/README.md).
+Changelog trên bản triển khai: [changelog.txt](/changelog.txt).
 
 ## Bản thử nghiệm chuyển động
 
