@@ -1,5 +1,21 @@
 Website kỷ niệm 18 năm hồi sinh Giáo xứ Khoái Đồng.
 
+## Changelog
+
+### 2026-10-17
+
+- Tích hợp nhánh `codex/story-motion` vào `main` tại commit `06a49cf`.
+- Thêm chuyển động mở đầu, số liệu đếm lên, mục lục thu gọn và tiến độ đọc.
+- Timeline theo vị trí cuộn, hỗ trợ cuộn nhanh xuôi/ngược và phương án dự phòng cho trình duyệt chưa hỗ trợ animation-timeline.
+- Chân dung hỗ trợ vuốt ngang trên mobile và điều khiển bằng bàn phím.
+- Thanh so sánh ảnh có hướng dẫn chuyển động một lần, dừng khi người dùng thao tác; nhãn A/B không khẳng định niên đại chưa xác minh.
+- Tạm ẩn nút “Xem lớn”; giữ mã hộp xem ảnh để sử dụng sau.
+- Giữ favicon ICO và các chỉnh sửa header từ bản nền.
+- Hỗ trợ giảm chuyển động; nội dung vẫn đọc được khi tắt JavaScript.
+- Kiểm tra timeline đạt ở 390/768/1440px. Kiểm tra motion với phần mở ảnh đang ẩn được bỏ qua đạt ở 320/390/1440px, gồm cảm ứng mô phỏng, bàn phím, giảm chuyển động và không JavaScript. Bài kiểm tra gốc còn yêu cầu bấm nút đang ẩn; chưa kiểm tra trên iPhone Safari thực tế.
+
+Changelog trên bản triển khai: [README.md](/README.md).
+
 ## Bản thử nghiệm chuyển động
 
 Nhánh `codex/story-motion`, worktree riêng `giaoxukhoaidong-motion`.
@@ -20,7 +36,7 @@ Các thay đổi:
 - Chân dung vuốt ngang trên mobile; hỗ trợ phím trái/phải, Home/End; desktop có hover nhẹ.
 - Mục lục thu gọn và vạch tiến độ đọc; chữ nội dung mobile căn trái.
 - Thanh so sánh đầu tiên hướng dẫn một lần, dừng khi có thao tác.
-- Xem ảnh lớn, đổi A/B bằng cụm nút dưới ảnh; Escape đóng và trả focus.
+- Nút xem ảnh lớn đang tạm ẩn; mã hộp xem ảnh A/B được giữ lại.
 - Nhãn ảnh mẫu A/B thay cho niên đại chưa xác minh.
 - Tôn trọng prefers-reduced-motion, kể cả khi thay đổi trong lúc xem; nội dung vẫn đọc được khi tắt JavaScript.
 
