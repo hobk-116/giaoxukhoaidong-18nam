@@ -55,7 +55,7 @@ main { margin-top: calc(-1 * var(--header-height, 55.111px)); }
 .hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / .7), transparent 46%); pointer-events: none; }
 .anniversary-track { position: absolute; z-index: 1; inset: 0 24px var(--caption-gap); display: flex; align-items: flex-end; pointer-events: none; scroll-margin-top: 96px; }
 .milestones-overlay { position: sticky; bottom: max(28px, env(safe-area-inset-bottom)); width: 100%; text-align: center; color: #fff; }
-.hero-photo > img { animation: hero-settle 1.6s var(--ease) both; }
+.hero-photo > img { animation: hero-settle 2.07s cubic-bezier(.45, 0, .55, 1) both; }
 @keyframes hero-settle { from { transform: scale(1.03); } to { transform: scale(1); } }
 .anniversary-candidate { width: calc(min(100%, clamp(280px, 38vw, 500px)) * 2 / 3); height: auto; margin-inline: auto; }
 .section-photo > img, .history-photo > img { width: 100%; height: auto; }
