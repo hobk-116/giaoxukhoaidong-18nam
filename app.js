@@ -62,9 +62,6 @@ document.addEventListener('keydown', event => {
   }
 });
 
-const anniversary = document.querySelector('.milestones-overlay');
-anniversary.classList.add('is-ready');
-
 document.querySelectorAll('.cd-image-container').forEach((figure) => {
   const range = figure.querySelector('.comparison-range');
 
