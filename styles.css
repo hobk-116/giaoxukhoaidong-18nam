@@ -95,10 +95,11 @@ h2 { color: var(--ink); font-size: clamp(36px, 3.55vw, 48px); line-height: 1.083
 .parish-year { padding-bottom: 112px; }
 .parish-year > h2 { text-align: center; }
 .parish-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 48px 0 0; padding: 0; list-style: none; text-align: center; }
-.parish-stats li { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.parish-stats li { display: flex; flex-direction: column; align-items: center; gap: 0; }
 .parish-stats strong { font-size: clamp(32px, 3.2vw, 44px); line-height: 1.1; font-weight: 500; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .parish-stats h3 { color: var(--ink); font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -.02em; }
-.parish-stats p { max-width: 24ch; color: var(--muted); font-size: 14px; line-height: 1.5; text-wrap: balance; }
+.parish-stats p, .stat-approx { max-width: 24ch; color: var(--muted); font-size: 14px; line-height: 1.5; text-wrap: balance; }
+.parish-stats p { margin-top: 12px; }
 @media (max-aspect-ratio: 9/16), (max-width: 600px) {
   .parish-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
   .parish-year { padding-bottom: 72px; }
@@ -129,7 +130,6 @@ h2 { color: var(--ink); font-size: clamp(36px, 3.55vw, 48px); line-height: 1.083
 .comparison-caption { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-top: 22px; }
 .comparison-caption h3 { font-size: 24px; font-weight: 600; letter-spacing: -.02em; line-height: 1.167; }
 .comparison-caption p { color: var(--muted); font-size: 15px; line-height: 1.47; margin-top: 8px; }
-.sample-tag { color: var(--muted); font-size: 12px; line-height: 1.5; white-space: nowrap; padding-top: 2px; }
 /* CodyHouse comparison structure; full-size layers remain aligned while clipping. */
 .cd-image-container { container-type: inline-size; --progress: .5; --handle-size: 52px; --ring-space: 7px; --edge: calc(var(--handle-size) / 2 + var(--ring-space)); --position: calc(var(--edge) + (100% - var(--edge) * 2) * var(--progress)); position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; background: #dededb; isolation: isolate; }
 .cd-image-container.portrait { aspect-ratio: 3 / 4; }
@@ -149,7 +149,6 @@ h2 { color: var(--ink); font-size: clamp(36px, 3.55vw, 48px); line-height: 1.083
 .cd-image-container:has(.comparison-range:active) .cd-handle, .cd-image-container:has(.comparison-range:focus-visible) .cd-handle { background: var(--blue); color: #fff; transform: translate(-50%, -50%) scale(.92); }
 .comparison-range:disabled { cursor: default; }
 .comparison-error { position: absolute; bottom: 16px; left: 16px; right: 16px; background: #fff; color: var(--ink); border-radius: 12px; padding: 12px 16px; font-size: 14px; }
-.gallery-footnote { max-width: 72ch; margin: 48px auto 0; color: var(--muted); font-size: 12px; text-align: center; line-height: 1.5; }
 .no-script { margin-bottom: 24px; }
 .site-footer { background: var(--soft); padding-block: 16px 21.333px; }
 .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--hairline); }
@@ -193,8 +192,6 @@ h2 { color: var(--ink); font-size: clamp(36px, 3.55vw, 48px); line-height: 1.083
   .comparison-caption { flex-direction: row; padding-top: 18px; gap: 12px; }
   .comparison-caption h3 { font-size: 21px; }
   .comparison-caption p { font-size: 14px; }
-  .sample-tag { font-size: 10px; }
-  .gallery-footnote { text-align: left; margin-top: 32px; }
   .footer-main { gap: 8px; }
   .footer-brand { font-size: 14px; }
   .text-link { font-size: 12px; }
@@ -210,7 +207,6 @@ h2 { color: var(--ink); font-size: clamp(36px, 3.55vw, 48px); line-height: 1.083
 }
 
 /* Reading and navigation keep the existing compact identity header. */
-.reading-progress { position: absolute; z-index: 2; bottom: 0; left: 0; width: 100%; height: 2px; background: currentColor; transform: scaleX(var(--reading-progress, 0)); transform-origin: left; pointer-events: none; }
 .diocese { margin-left: auto; }
 .section-menu { flex: none; font-size: 14px; line-height: 20px; letter-spacing: normal; }
 .section-menu summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 8px; list-style: none; }
@@ -231,11 +227,7 @@ button:focus-visible, summary:focus-visible, .personnel-grid:focus-visible { out
 .timeline-entry.is-current::after { transform: scale(1.7); }
 .timeline-year { transition: color .3s var(--ease); }
 .timeline-entry.is-current .timeline-year { color: var(--link); }
-.person-card > img { transition: transform .5s var(--ease); }
 .personnel-hint { display: none; }
-@media (hover: hover) and (pointer: fine) {
-  .person-card:hover > img { transform: scale(1.02); }
-}
 .view-large, .photo-close, .photo-switch button { min-height: 44px; padding: 8px 16px; border: 1px solid var(--hairline); border-radius: 24px; color: var(--ink); background: var(--canvas); font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: normal; cursor: pointer; transition: background-color 120ms, color 120ms, border-color 120ms; }
 .view-large { margin-top: 16px; color: var(--link); border-color: var(--link); }
 .photo-close { border-color: transparent; }
@@ -264,7 +256,6 @@ html.photo-open { overflow: hidden; scrollbar-gutter: stable; }
   .identity-header { gap: 12px; }
   .section-menu { margin-left: auto; }
   .section-menu nav { left: -4px; right: -4px; width: auto; }
-  .intro-copy p, .timeline-copy p { text-align: left; }
   .personnel-hint { display: block; margin: -12px 0 16px; color: var(--muted); font-size: 13px; }
   .personnel-grid { display: flex; justify-content: flex-start; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 0; padding-block: 4px 16px; }
   .person-card { flex: 0 0 min(85%, 320px); scroll-snap-align: start; }
@@ -280,7 +271,6 @@ html.photo-open { overflow: hidden; scrollbar-gutter: stable; }
 @media (prefers-reduced-motion: reduce) {
   .section-menu[open] nav { animation: none; }
   .history-timeline::after { animation: none; transform: scaleY(1); }
-  .person-card:hover > img { transform: none; }
   .personnel-grid { scroll-behavior: auto; }
 }
 

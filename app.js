@@ -22,8 +22,6 @@ function updateHeader() {
   const inkProgress = Math.max(0, Math.min(1, (header.offsetHeight + 100 - bottom) / 100));
   header.style.setProperty('--header-progress', progress);
   header.style.setProperty('--header-ink-progress', inkProgress);
-  const scrollLength = document.documentElement.scrollHeight - innerHeight;
-  header.style.setProperty('--reading-progress', Math.max(0, Math.min(1, scrollY / Math.max(1, scrollLength))));
   const readingLine = innerHeight * .45;
   const timelineBox = timeline.getBoundingClientRect();
   if (!nativeTimeline) {
@@ -96,48 +94,9 @@ document.querySelectorAll('.cd-image-container').forEach((figure) => {
   });
 });
 
-// Content remains visible without JavaScript and after motion is disabled.
-const reveals = new IntersectionObserver(entries => {
-  entries.forEach(({ target, isIntersecting }) => {
-    if (!isIntersecting) return;
-    reveals.unobserve(target);
-    if (reducedMotion.matches) return;
-    target.animate([
-      { opacity: .25, transform: 'translateY(16px)' },
-      { opacity: 1, transform: 'translateY(0)' }
-    ], { duration: 700, delay: Number(target.dataset.delay || 0), easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
-  });
-}, { threshold: .15 });
-document.querySelectorAll('.introduction-photo, .person-card, .parish-stats li').forEach((element) => reveals.observe(element));
-document.querySelectorAll('.parish-stats li').forEach((element, index) => { element.dataset.delay = index * 80; });
 reducedMotion.addEventListener('change', () => {
   if (reducedMotion.matches) document.getAnimations().forEach(animation => animation.cancel());
 });
-
-const counters = new IntersectionObserver(entries => {
-  entries.forEach(({ target, isIntersecting }) => {
-    if (!isIntersecting) return;
-    counters.unobserve(target);
-    if (reducedMotion.matches) return;
-    const label = target.textContent;
-    const final = Number(label.replace('~', ''));
-    const prefix = label.startsWith('~') ? '~' : '';
-    const visible = document.createElement('span');
-    visible.setAttribute('aria-hidden', 'true');
-    const accessible = document.createElement('span');
-    accessible.className = 'visually-hidden';
-    accessible.textContent = label;
-    target.replaceChildren(visible, accessible);
-    const start = performance.now();
-    function tick(now) {
-      const progress = reducedMotion.matches ? 1 : Math.min(1, (now - start) / 800);
-      visible.textContent = prefix + Math.round(final * (1 - (1 - progress) ** 3));
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  });
-}, { threshold: .5 });
-document.querySelectorAll('.parish-stats strong').forEach(element => counters.observe(element));
 
 const portraits = document.querySelector('.personnel-grid');
 portraits.addEventListener('keydown', event => {
