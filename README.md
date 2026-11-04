@@ -1,49 +1,38 @@
-Website kỷ niệm 18 năm hồi sinh Giáo xứ Khoái Đồng.
+# Giáo xứ Khoái Đồng: 18 năm hồi sinh
 
-## Changelog
+Website kỷ niệm 18 năm hồi sinh Giáo xứ Khoái Đồng, từ ngày 07.11.2008 đến ngày 07.11.2026. Trang được xây dựng bằng HTML, CSS và JavaScript.
 
-### 2026-10-17
+## Các phần của trang
 
-- Tích hợp nhánh `codex/story-motion` vào `main` tại commit `06a49cf`.
-- Thêm chuyển động mở đầu, số liệu đếm lên, mục lục thu gọn và tiến độ đọc.
-- Timeline theo vị trí cuộn, hỗ trợ cuộn nhanh xuôi/ngược và phương án dự phòng cho trình duyệt chưa hỗ trợ animation-timeline.
-- Chân dung hỗ trợ vuốt ngang trên mobile và điều khiển bằng bàn phím.
-- Thanh so sánh ảnh có hướng dẫn chuyển động một lần, dừng khi người dùng thao tác; nhãn A/B không khẳng định niên đại chưa xác minh.
-- Tạm ẩn nút “Xem lớn”; giữ mã hộp xem ảnh để sử dụng sau.
-- Giữ favicon ICO và các chỉnh sửa header từ bản nền.
-- Hỗ trợ giảm chuyển động; nội dung vẫn đọc được khi tắt JavaScript.
-- Kiểm tra timeline đạt ở 390/768/1440px. Kiểm tra motion với phần mở ảnh đang ẩn được bỏ qua đạt ở 320/390/1440px, gồm cảm ứng mô phỏng, bàn phím, giảm chuyển động và không JavaScript. Bài kiểm tra gốc còn yêu cầu bấm nút đang ẩn; chưa kiểm tra trên iPhone Safari thực tế.
+- Mở đầu: ảnh thánh đường và dấu mốc kỷ niệm 18 năm.
+- Giới thiệu: vị trí, khuôn viên và kiến trúc nhà thờ.
+- Lược sử: các mốc từ khi thành lập giáo họ đến khi giáo xứ hồi sinh, kèm ảnh tư liệu.
+- Thống kê năm 2026: số nhân danh, hội đoàn, thiếu nhi học giáo lý và học viên giáo lý dự tòng, hôn nhân.
+- Các tu sĩ đang phụng vụ: chân dung và thông tin các linh mục, phó tế, nữ tu.
+- Hình ảnh giáo xứ qua thời gian: bốn cặp ảnh với thanh kéo để so sánh. Các cặp ảnh hiện là thử nghiệm, chưa có ảnh năm 2026 và chưa xác minh niên đại; tiêu đề và mô tả vẫn là nội dung mẫu.
 
-Changelog trên bản triển khai: [changelog.txt](/changelog.txt).
+## Tương tác
 
-## Bản thử nghiệm chuyển động
+Mục lục dẫn đến các phần chính. Dòng thời gian đánh dấu mốc theo vị trí cuộn. Danh sách chân dung hỗ trợ cuộn ngang trên màn hình nhỏ và điều khiển bằng phím mũi tên, Home và End. Thanh so sánh ảnh hỗ trợ chuột, cảm ứng và bàn phím; cặp đầu tiên có hướng dẫn chuyển động một lần.
 
-Nhánh `codex/story-motion`, worktree riêng `giaoxukhoaidong-motion`.
-Bản nền là snapshot các file hiện tại từ `giaoxukhoaidong-18nam`, bao gồm thay đổi chưa commit; bản gốc vẫn giữ nguyên trên `main`.
+Trang có liên kết đến nội dung chính, hỗ trợ tùy chọn giảm chuyển động và hiển thị nội dung khi tắt JavaScript. Thanh so sánh cần JavaScript. Nút xem ảnh lớn hiện đang ẩn.
 
-Chạy riêng, không dừng các server 4173/4175:
+## Chạy cục bộ
+
+Trong thư mục dự án, chạy:
 
 ```sh
-python3 -m http.server 4176 --bind 127.0.0.1 --directory .
+python3 -m http.server 4176 --bind 127.0.0.1
 ```
 
-Mở http://127.0.0.1:4176 trên máy này. Đây là preview cục bộ, không phải bản triển khai Vercel.
+Mở http://127.0.0.1:4176 trong trình duyệt. Đây là bản xem cục bộ.
 
-Các thay đổi:
-- Ảnh mở đầu thu nhẹ, tiêu đề/ngày hiện lệch nhịp; ảnh toàn cảnh và chân dung hiện một lần.
-- Số liệu đếm lên, giữ số cuối và dấu xấp xỉ; trình đọc màn hình đọc giá trị cuối.
-- Timeline đậm theo cuộn, nhấn mốc đang đọc; nội dung lịch sử giữ nguyên.
-- Chân dung vuốt ngang trên mobile; hỗ trợ phím trái/phải, Home/End; desktop có hover nhẹ.
-- Mục lục thu gọn và vạch tiến độ đọc; chữ nội dung mobile căn trái.
-- Thanh so sánh đầu tiên hướng dẫn một lần, dừng khi có thao tác.
-- Nút xem ảnh lớn đang tạm ẩn; mã hộp xem ảnh A/B được giữ lại.
-- Nhãn ảnh mẫu A/B thay cho niên đại chưa xác minh.
-- Tôn trọng prefers-reduced-motion, kể cả khi thay đổi trong lúc xem; nội dung vẫn đọc được khi tắt JavaScript.
+## Tệp dự án
 
-Kiểm tra (cần Playwright và Chrome có sẵn):
-
-```sh
-node tests/check-motion.cjs
-```
-
-Có thể đặt `PREVIEW_URL` hoặc `CAPTURE_DIR`. Nếu Playwright không nằm trong project, đặt `NODE_PATH` tới thư mục node_modules của môi trường đã cài. Kiểm tra gồm 320/390/1440px, bàn phím, cảm ứng mô phỏng Chromium, animation, hộp thoại, reduced motion và không JavaScript. Chưa kiểm tra trên iPhone Safari thực tế.
+- `index.html`: nội dung và cấu trúc trang.
+- `styles.css`: bố cục, giao diện và chuyển động.
+- `app.js`: điều hướng và tương tác.
+- `assets/`: hình ảnh và các tài nguyên của trang.
+- `tests/`: các tập lệnh kiểm tra chuyển động và dòng thời gian.
+- [credits.txt](credits.txt): nguồn ảnh và tham khảo thiết kế.
+- [changelog.txt](changelog.txt): lịch sử thay đổi và giới hạn kiểm tra đã ghi nhận.

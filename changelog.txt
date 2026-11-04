@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2026-11-01
+
+- Cập nhật mục thống kê năm 2026 và nội dung mẫu của thư viện ảnh; ghi chú các cặp ảnh đang thử nghiệm và chưa có ảnh 2026.
+- Bỏ vạch tiến độ đọc và hiệu ứng đếm số; liên kết ở chân trang dẫn đến giaoxukhoaidong.com.
+
+### 2026-10-22 đến 2026-10-23
+
+- Thêm hình chữ số kỷ niệm dạng SVG, điều chỉnh nét cắt và đồng bộ chuyển động ở phần mở đầu.
+
 ### 2026-10-17
 
 - Tích hợp nhánh `codex/story-motion` vào `main` tại commit `06a49cf`.
