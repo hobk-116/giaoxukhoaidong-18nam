@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2026-11-07
+
+- Đặt ảnh bàn giao ngay sau đoạn Năm 2008; vị trí cũ dùng ảnh DSC00176.JPG về tu sửa nhà thờ.
+- Thêm ảnh Giaoxukhoaidong1940s.jpg dưới mốc 1941. Bốn ảnh lược sử có chú thích chữ trắng đậm, căn giữa trên gradient đen ngắn.
+- Hero dùng lại cặp số 3, mặt tiền nhìn từ cổng phụ phía tây. Xuất typo-candidate.png nền trong suốt, kích thước 2016 × 1716 px.
+- Đổi ảnh preview Open Graph và Twitter Card sang Giaoxukhoaidong2025.jpg, đồng bộ loại ảnh, kích thước và mô tả.
+- Giữ các chỉnh sửa cách viết nhà thờ, danh xưng Đức cố Giám mục và chú thích ảnh trong nội dung hiện tại; cập nhật README và nguồn ảnh.
+- Kiểm tra bằng Chrome headless ở 390 và 1440px đạt với bốn ảnh, kiểu chú thích, cặp hero, metadata preview, không tràn ngang và không có lỗi JavaScript. Kiểm tra đường dẫn tài nguyên và git diff --check đạt. Chưa xác minh bản triển khai hoặc preview trên ứng dụng chia sẻ.
+
 ### 2026-11-01
 
 - Cập nhật mục thống kê năm 2026 và nội dung mẫu của thư viện ảnh; ghi chú các cặp ảnh đang thử nghiệm và chưa có ảnh 2026.

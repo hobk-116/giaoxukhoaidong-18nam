@@ -63,8 +63,8 @@ main { margin-top: calc(-1 * var(--header-height, 55.111px)); }
 .anniversary-candidate { width: calc(min(100%, clamp(280px, 38vw, 500px)) * 2 / 3); height: auto; margin-inline: auto; }
 .section-photo > img, .history-photo > img { width: 100%; height: auto; }
 .introduction-photo { margin-top: 80px; }
-.history-photo { margin-block: 24px; }
-.history-photo > img { border-radius: 16px; }
+.history-photo { position: relative; overflow: hidden; margin-block: 24px; border-radius: 16px; }
+.history-photo figcaption { position: absolute; right: 0; bottom: 0; left: 0; padding: 36px 16px 14px; color: #fff; background: linear-gradient(to top, rgb(0 0 0 / .78), rgb(0 0 0 / .46) 56%, transparent); font-size: 16px; font-weight: 700; line-height: 1.5; text-align: center; text-wrap: balance; }
 @media (max-width: 600px) {
   .introduction-photo { margin-top: 48px; }
 }

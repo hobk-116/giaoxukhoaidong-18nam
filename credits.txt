@@ -14,3 +14,11 @@ User-provided Picture 220.jpg and selected files from nt cũ.
 Web copies resized and encoded as WebP; no retouching, no generated photographs.
 Source provenance is embedded in each WebP XMP field and listed in .impeccable/assets.json
 in the development project. Nine before/after pairs supplied by the user in Anh-2008-2026, grouped by Artboard number.
+
+History photo additions supplied by the user:
+- Giaoxukhoaidong1940s.jpg, copied unchanged for the 1941 entry.
+- DSC00176.JPG from nt cũ, copied unchanged for the December 2008 repair caption.
+History captions follow the user-provided wording and subsequent content edits.
+Typography export: typo-candidate.png rendered from the existing typo-candidate.svg
+at 4x resolution (2016 x 1716), with transparency and animation at its final state.
+Sharing preview: existing user-supplied Giaoxukhoaidong2025.jpg.

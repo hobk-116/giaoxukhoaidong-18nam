@@ -4,12 +4,18 @@ Website kỷ niệm 18 năm hồi sinh Giáo xứ Khoái Đồng, từ ngày 07.
 
 ## Các phần của trang
 
-- Mở đầu: ảnh thánh đường và dấu mốc kỷ niệm 18 năm.
+- Mở đầu: cặp ảnh mặt tiền thánh đường nhìn từ cổng phụ phía tây năm 2008 và 2026, cùng dấu mốc kỷ niệm 18 năm.
 - Giới thiệu: vị trí, khuôn viên và kiến trúc nhà thờ.
-- Lược sử: các mốc từ khi thành lập giáo họ đến khi giáo xứ hồi sinh, kèm ảnh tư liệu.
-- Thống kê năm 2026: số nhân danh, hội đoàn, thiếu nhi học giáo lý và học viên giáo lý dự tòng, hôn nhân.
+- Lược sử: các mốc từ khi thành lập giáo họ đến khi giáo xứ hồi sinh, kèm bốn ảnh tư liệu những năm 1940, những năm 1960, bàn giao nhà thờ và tu sửa tháng 12.2008. Chú thích dùng chữ trắng đậm căn giữa trên gradient đen ngắn ở chân ảnh.
+- Thống kê năm 2026: số nhân danh, hội đoàn và thiếu nhi học giáo lý.
 - Các tu sĩ đang phụng vụ: chân dung và thông tin các linh mục, phó tế, nữ tu.
 - Hình ảnh giáo xứ qua thời gian: chín cặp ảnh năm 2008 và 2026 do người dùng cung cấp, với thanh kéo để so sánh.
+
+## Ảnh chia sẻ và bản xuất
+
+Ảnh preview khi chia sẻ liên kết dùng `assets/images/Giaoxukhoaidong2025.jpg` cho Open Graph và Twitter Card.
+
+Bản xuất chữ hero nằm tại [typo-candidate.png](assets/images/typo-candidate.png), kích thước 2016 × 1716 px, nền trong suốt. Hero trên trang dùng SVG `typo-candidate.svg` có chuyển động.
 
 ## Tương tác
 
