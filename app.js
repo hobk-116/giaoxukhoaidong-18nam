@@ -17,9 +17,8 @@ new ResizeObserver(() => {
 }).observe(header);
 let headerFrame;
 function updateHeader() {
-  const bottom = hero.getBoundingClientRect().bottom;
-  const progress = Math.max(0, Math.min(1, -bottom / 125));
-  const inkProgress = Math.max(0, Math.min(1, (header.offsetHeight + 100 - bottom) / 100));
+  const progress = Math.max(0, Math.min(1, scrollY / 125));
+  const inkProgress = progress;
   header.style.setProperty('--header-progress', progress);
   header.style.setProperty('--header-ink-progress', inkProgress);
   const readingLine = innerHeight * .45;
@@ -109,57 +108,142 @@ portraits.addEventListener('keydown', event => {
   portraits.scrollTo({ left, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
 });
 
-// Only the first comparison teaches the gesture, once; input always takes over.
-const firstComparison = document.querySelector('.cd-image-container');
-const firstRange = firstComparison.querySelector('input');
+// Teach the gesture on the most visible comparison until any comparison is used.
+const comparisons = [...document.querySelectorAll('.cd-image-container')];
+let hintsDismissed = false;
+const cumulative = [0];
+const heroCumulative = [0];
+for (let i = 1; i <= 120; i++) {
+  const x = -3 + (i - .5) / 20;
+  cumulative.push(cumulative[i - 1] + Math.exp(-x * x / 2));
+  // Move the Gaussian center from 50% to 60%, keeping its original spread.
+  heroCumulative.push(heroCumulative[i - 1] + Math.exp(-((x - .6) ** 2) / 2));
+}
+function gaussianPosition(t, curve = cumulative) {
+  const index = Math.max(0, Math.min(1, t)) * 120;
+  const lower = Math.floor(index);
+  return (curve[lower] + (curve[Math.min(lower + 1, 120)] - curve[lower]) * (index - lower)) / curve[120];
+}
+
+// Follow the hero's existing animation clock so zoom, reveal and scroll finish together.
+if (innerWidth > 600 && hero.offsetHeight > innerHeight && scrollY === 0 && !location.hash && !reducedMotion.matches) {
+  const heroZoom = hero.querySelector('.hero-images img').getAnimations()[0];
+  if (heroZoom) {
+    const target = Math.max(0, hero.offsetTop + hero.offsetHeight * .95 - innerHeight);
+    const controls = new AbortController();
+    let frame;
+    function stopHeroScroll() {
+      cancelAnimationFrame(frame);
+      controls.abort();
+    }
+    function tickHeroScroll() {
+      const progress = Math.min(1, (heroZoom.currentTime || 0) / 3370);
+      window.scrollTo({ top: target * gaussianPosition(progress, heroCumulative), behavior: 'instant' });
+      if (progress < 1) frame = requestAnimationFrame(tickHeroScroll);
+      else stopHeroScroll();
+    }
+    for (const event of ['wheel', 'touchstart', 'pointerdown', 'resize', 'pagehide']) {
+      window.addEventListener(event, stopHeroScroll, { passive: true, signal: controls.signal });
+    }
+    window.addEventListener('keydown', event => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) stopHeroScroll();
+    }, { signal: controls.signal });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopHeroScroll();
+    }, { signal: controls.signal });
+    reducedMotion.addEventListener('change', stopHeroScroll, { signal: controls.signal });
+    frame = requestAnimationFrame(tickHeroScroll);
+  }
+}
+let activeHint;
 let hintFrame;
-let hintUsed = false;
-const hint = new IntersectionObserver(entries => {
-  if (!entries[0].isIntersecting || hintUsed) return;
-  hintUsed = true;
-  hint.disconnect();
-  if (reducedMotion.matches || firstRange.disabled) return;
-  firstComparison.classList.add('is-hinting');
-  // Integrate a Gaussian velocity curve over -3σ…3σ into position.
-  const cumulative = [0];
-  for (let i = 1; i <= 120; i++) {
-    const x = -3 + (i - .5) / 20;
-    cumulative.push(cumulative[i - 1] + Math.exp(-x * x / 2));
+let hintTimer;
+let selectionFrame;
+function stopHint() {
+  cancelAnimationFrame(hintFrame);
+  clearTimeout(hintTimer);
+  if (!activeHint) return;
+  activeHint.classList.remove('is-hinting');
+  if (!hintsDismissed) {
+    const range = activeHint.querySelector('.comparison-range');
+    range.value = '50';
+    range.dispatchEvent(new Event('input'));
   }
-  function gaussianPosition(t) {
-    const index = Math.max(0, Math.min(1, t)) * 120;
-    const lower = Math.floor(index);
-    return (cumulative[lower] + (cumulative[Math.min(lower + 1, 120)] - cumulative[lower]) * (index - lower)) / cumulative[120];
-  }
+  activeHint = null;
+}
+function startHint(figure) {
+  activeHint = figure;
+  const range = figure.querySelector('.comparison-range');
+  figure.classList.remove('hint-interrupted');
+  figure.style.setProperty('--hint-opacity', 0);
+  figure.classList.add('is-hinting');
   const start = performance.now();
   function tick(now) {
-    if (firstRange.disabled) { stopHint(); return; }
-    const elapsed = reducedMotion.matches ? 2400 : now - start;
-    if (elapsed >= 1800) firstComparison.classList.remove('is-hinting');
+    if (activeHint !== figure || range.disabled) { selectHint(); return; }
+    const elapsed = Math.min(2400, now - start);
+    if (elapsed >= 1800) figure.classList.remove('is-hinting');
     let position;
     if (elapsed < 600) {
-      const progress = 2 * gaussianPosition(.5 + elapsed / 1200) - 1;
+      // Integrate the full bell-shaped velocity curve, starting and ending gently.
+      const progress = gaussianPosition(elapsed / 600);
+      figure.style.setProperty('--hint-opacity', progress);
       position = 50 - 49 * progress;
     } else if (elapsed < 1800) {
+      figure.style.setProperty('--hint-opacity', 1);
       position = 1 + 98 * gaussianPosition((elapsed - 600) / 1200);
     } else {
       position = 99 - 49 * gaussianPosition((elapsed - 1800) / 600);
     }
-    firstRange.value = String(position);
-    firstRange.dispatchEvent(new Event('input'));
+    range.value = String(position);
+    range.dispatchEvent(new Event('input'));
     if (elapsed < 2400) hintFrame = requestAnimationFrame(tick);
+    else hintTimer = setTimeout(() => {
+      selectHint();
+      if (activeHint === figure) startHint(figure);
+    }, 2000);
   }
   hintFrame = requestAnimationFrame(tick);
-}, { threshold: .3 });
-hint.observe(firstComparison);
-function stopHint() {
-  firstComparison.classList.add('hint-interrupted');
-  firstComparison.classList.remove('is-hinting');
-  hintUsed = true;
-  hint.disconnect();
-  cancelAnimationFrame(hintFrame);
 }
-['pointerdown', 'touchstart', 'keydown', 'focus'].forEach(type => firstRange.addEventListener(type, stopHint, { passive: true }));
+function selectHint() {
+  if (hintsDismissed || reducedMotion.matches || document.hidden) { stopHint(); return; }
+  let best;
+  let largestArea = 0;
+  for (const figure of comparisons) {
+    const range = figure.querySelector('.comparison-range');
+    if (range.disabled || [...figure.querySelectorAll('img')].some(img => !img.complete || !img.naturalWidth)) continue;
+    const rect = figure.getBoundingClientRect();
+    const width = Math.max(0, Math.min(rect.right, innerWidth) - Math.max(rect.left, 0));
+    const height = Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0));
+    const area = width * height;
+    if (area > largestArea) { best = figure; largestArea = area; }
+  }
+  if (best === activeHint) return;
+  stopHint();
+  if (best) startHint(best);
+}
+function scheduleHint() {
+  if (!selectionFrame) selectionFrame = requestAnimationFrame(() => {
+    selectionFrame = null;
+    selectHint();
+  });
+}
+comparisons.forEach(figure => {
+  const range = figure.querySelector('.comparison-range');
+  function markUsed() {
+    hintsDismissed = true;
+    comparisons.forEach(item => item.classList.add('hint-interrupted'));
+    stopHint();
+  }
+  figure.addEventListener('pointerdown', markUsed, { passive: true });
+  range.addEventListener('keydown', markUsed);
+  range.addEventListener('focus', markUsed);
+  figure.querySelectorAll('img').forEach(img => img.addEventListener('load', scheduleHint));
+});
+window.addEventListener('scroll', scheduleHint, { passive: true });
+window.addEventListener('resize', scheduleHint);
+document.addEventListener('visibilitychange', scheduleHint);
+reducedMotion.addEventListener('change', scheduleHint);
+scheduleHint();
 
 const photoDialog = document.querySelector('.photo-dialog');
 const photoImage = photoDialog.querySelector('.photo-large');

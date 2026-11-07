@@ -13,4 +13,4 @@ Photographs:
 User-provided Picture 220.jpg and selected files from nt cũ.
 Web copies resized and encoded as WebP; no retouching, no generated photographs.
 Source provenance is embedded in each WebP XMP field and listed in .impeccable/assets.json
-in the development project. Sample pairings do not establish before/after chronology.
+in the development project. Nine before/after pairs supplied by the user in Anh-2008-2026, grouped by Artboard number.
